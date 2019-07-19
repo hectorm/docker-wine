@@ -21,8 +21,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		cabextract \
+		dosbox \
+		exe-thumbnailer \
 		make \
 		wimtools \
+		winbind \
 		winehq-devel \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -43,8 +46,10 @@ RUN mkdir /tmp/win10/ && cd /tmp/win10/ \
 	&& curl -Lo ./win10.iso "${WIN10_ISO_URL}" \
 	&& echo "${WIN10_ISO_CHECKSUM}  ./win10.iso" | sha256sum -c \
 	&& 7z e ./win10.iso sources/install.wim \
-	&& DESTDIR=/usr/share/fonts/truetype/ttf-ms-win10/ \
-	&& wimextract install.wim 1 /Windows/Fonts/*.ttf /Windows/Fonts/*.ttc /Windows/System32/Licenses/neutral/*/*/license.rtf --dest-dir "${DESTDIR}" \
+	&& wimextract install.wim 1 \
+		/Windows/Fonts/*.ttf /Windows/Fonts/*.ttc \
+		/Windows/System32/Licenses/neutral/*/*/license.rtf \
+		--dest-dir /usr/share/fonts/truetype/win10/ \
 	&& fc-cache -fv \
 	&& rm -rf /tmp/win10/
 
