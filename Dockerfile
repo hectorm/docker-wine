@@ -52,6 +52,3 @@ RUN mkdir /tmp/win10/ && cd /tmp/win10/ \
 		--dest-dir /usr/share/fonts/truetype/win10/ \
 	&& fc-cache -fv \
 	&& rm -rf /tmp/win10/
-
-# Store all user data in a volume
-VOLUME /home/wine/
