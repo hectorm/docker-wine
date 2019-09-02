@@ -33,8 +33,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ARG WINETRICKS_TREEISH=master
 ARG WINETRICKS_REMOTE=https://github.com/Winetricks/winetricks.git
 RUN mkdir /tmp/winetricks/ && cd /tmp/winetricks/ \
-	&& git clone "${WINETRICKS_REMOTE}" ./ \
-	&& git checkout "${WINETRICKS_TREEISH}" \
+	&& git clone "${WINETRICKS_REMOTE:?}" ./ \
+	&& git checkout "${WINETRICKS_TREEISH:?}" \
 	&& git submodule update --init --recursive \
 	&& make install \
 	&& rm -rf /tmp/winetricks/
@@ -43,8 +43,8 @@ RUN mkdir /tmp/winetricks/ && cd /tmp/winetricks/ \
 ARG WIN10_ISO_URL=https://software-download.microsoft.com/download/pr/18362.30.190401-1528.19h1_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
 ARG WIN10_ISO_CHECKSUM=ab4862ba7d1644c27f27516d24cb21e6b39234eb3301e5f1fb365a78b22f79b3
 RUN mkdir /tmp/win10/ && cd /tmp/win10/ \
-	&& curl -Lo ./win10.iso "${WIN10_ISO_URL}" \
-	&& echo "${WIN10_ISO_CHECKSUM}  ./win10.iso" | sha256sum -c \
+	&& curl -Lo ./win10.iso "${WIN10_ISO_URL:?}" \
+	&& echo "${WIN10_ISO_CHECKSUM:?}  ./win10.iso" | sha256sum -c \
 	&& 7z e ./win10.iso sources/install.wim \
 	&& wimextract install.wim 1 \
 		/Windows/Fonts/*.ttf /Windows/Fonts/*.ttc \
