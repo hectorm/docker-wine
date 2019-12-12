@@ -38,9 +38,12 @@ printf -- '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
 	--hostname "${CONTAINER_NAME:?}" \
 	--restart on-failure:3 \
 	--log-opt max-size=32m \
+	--publish 3322:3322/tcp \
 	--publish 3389:3389/tcp \
 	--shm-size 2g \
-	--device /dev/dri \
+	--privileged \
+	--env ENABLE_SSHD=true \
+	--env ENABLE_VIRTUALGL=true \
 	--mount type=volume,src="${VOLUME_NAME:?}",dst='/home/wine/' \
 	"${IMAGE_NAME:?}" "$@" >/dev/null
 
