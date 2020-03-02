@@ -5,15 +5,17 @@ A Docker image for [Wine](https://www.winehq.org) based on [Xubuntu on Docker](h
 ## Start an instance
 
 ```sh
-docker run --detach \
+docker run \
   --name wine \
-  --publish 3389:3389/tcp \
+  --detach \
   --shm-size 2g \
-  --device /dev/dri \
+  --publish 3322:3322/tcp \
+  --publish 3389:3389/tcp \
+  --device /dev/dri:/dev/dri \
   hectormolinero/wine:latest
 ```
 
-> You will be able to connect to the container via RDP through 3389/tcp port.
+> You will be able to connect to the container via SSH through 3322/tcp port and RDP through 3389/tcp port.
 
 > **Important:** some software (like Firefox) need the shared memory to be increased, if you
 encounter any problem related to this you may use the `--shm-size` option.
@@ -29,7 +31,6 @@ required for VirtualGL will conflict with the host X server.
 * `UNPRIVILEGED_USER_PASSWORD`: unprivileged user password (`password` by default).
 * `UNPRIVILEGED_USER_GROUPS`: comma-separated list of additional GIDs for the unprivileged user (none by default).
 * `UNPRIVILEGED_USER_SHELL`: unprivileged user shell (`/bin/bash` by default).
-* `ENABLE_SSHD`: enable SSH server in the container (`false` by default).
 * `ENABLE_VIRTUALGL`: enable VirtualGL support in the container (`false` by default).
 
 ## License
