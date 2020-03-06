@@ -40,8 +40,8 @@ RUN mkdir /tmp/winetricks/ && cd /tmp/winetricks/ \
 	&& rm -rf /tmp/winetricks/
 
 # Install Microsoft Windows 10 fonts
-ARG WIN10_ISO_URL=https://software-download.microsoft.com/download/pr/18362.30.190401-1528.19h1_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
-ARG WIN10_ISO_CHECKSUM=ab4862ba7d1644c27f27516d24cb21e6b39234eb3301e5f1fb365a78b22f79b3
+ARG WIN10_ISO_URL=https://software-download.microsoft.com/download/pr/18363.418.191007-0143.19h2_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
+ARG WIN10_ISO_CHECKSUM=9ef81b6a101afd57b2dbfa44d5c8f7bc94ff45b51b82c5a1f9267ce2e63e9f53
 RUN mkdir /tmp/win10/ && cd /tmp/win10/ \
 	&& curl -Lo ./win10.iso "${WIN10_ISO_URL:?}" \
 	&& echo "${WIN10_ISO_CHECKSUM:?}  ./win10.iso" | sha256sum -c \
