@@ -41,7 +41,7 @@ printf -- '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
 	--shm-size 2g \
 	--publish 3322:3322/tcp \
 	--publish 3389:3389/tcp \
-	--env ENABLE_VIRTUALGL=true \
+	--env ENABLE_XDUMMY=true \
 	--device /dev/dri:/dev/dri \
 	--mount type=volume,src="${VOLUME_NAME:?}",dst=/home/wine/ \
 	"${IMAGE_NAME:?}" "$@" >/dev/null
