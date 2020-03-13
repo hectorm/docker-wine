@@ -5,7 +5,8 @@
 FROM docker.io/hectormolinero/xubuntu:latest AS wine
 
 # Environment
-ENV WINEARCH=win32
+ENV WINEARCH=win64
+ENV WINEDEBUG=warn+all
 ENV UNPRIVILEGED_USER_NAME=wine
 
 # Add Wine repository
