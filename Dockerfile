@@ -21,9 +21,14 @@ RUN printf '%s\n' 'deb https://download.opensuse.org/repositories/Emulators:/Win
 RUN printf '%s\n' 'deb http://ppa.launchpad.net/lutris-team/lutris/ubuntu/ bionic main' > /etc/apt/sources.list.d/lutris.list \
 	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 82D96E430A1F1C0F0502747E37B90EDD4E3EFAE4
 
+# Add kisak-mesa repository
+RUN printf '%s\n' 'deb http://ppa.launchpad.net/kisak/kisak-mesa/ubuntu/ bionic main' > /etc/apt/sources.list.d/kisak-mesa.list \
+	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB8B81E14DA65431D7504EA8F63F0F2B90935439
+
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
+	&& apt-get dist-upgrade -y \
 	&& apt-get install -y --no-install-recommends \
 		cabextract \
 		dosbox \
