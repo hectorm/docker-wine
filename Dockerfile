@@ -41,8 +41,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install Microsoft Windows 10 fonts
-ARG WIN10_ISO_URL=https://software-download.microsoft.com/download/pr/18363.418.191007-0143.19h2_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
-ARG WIN10_ISO_CHECKSUM=9ef81b6a101afd57b2dbfa44d5c8f7bc94ff45b51b82c5a1f9267ce2e63e9f53
+ARG WIN10_ISO_URL=https://software-download.microsoft.com/download/pr/19041.264.200511-0456.vb_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
+ARG WIN10_ISO_CHECKSUM=f1a4f2176259167cd2c8bf83f3f5a4039753b6cc28c35ac624da95a36e9620fc
 RUN mkdir /tmp/win10/ && cd /tmp/win10/ \
 	&& curl -Lo ./win10.iso "${WIN10_ISO_URL:?}" \
 	&& printf '%s' "${WIN10_ISO_CHECKSUM:?}  ./win10.iso" | sha256sum -c \
