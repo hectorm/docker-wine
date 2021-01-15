@@ -30,7 +30,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		make \
 		wimtools \
 		winbind \
-		winehq-devel \
+		winehq-stable \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install Microsoft Windows 10 fonts
