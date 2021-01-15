@@ -4,6 +4,8 @@ A Docker image for [Wine](https://www.winehq.org) based on [Xubuntu on Docker](h
 
 ## Start an instance
 
+### Docker CLI
+
 ```sh
 docker run \
   --name wine \
@@ -12,7 +14,22 @@ docker run \
   --publish 3322:3322/tcp \
   --publish 3389:3389/tcp \
   --device /dev/dri:/dev/dri \
-  hectormolinero/wine:latest
+  docker.io/hectormolinero/wine:latest
+```
+
+### Docker Compose
+
+```yaml
+version: '3.8'
+services:
+  wine:
+    image: 'docker.io/hectormolinero/wine:latest'
+    shm_size: '2gb'
+    ports:
+      - '3322:3322/tcp'
+      - '3389:3389/tcp'
+    devices:
+      - '/dev/dri:/dev/dri'
 ```
 
 > You will be able to connect to the container via SSH through 3322/tcp port and RDP through 3389/tcp port.
