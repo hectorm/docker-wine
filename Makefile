@@ -47,7 +47,7 @@ build-image:
 ##################################################
 
 define save_image
-	'$(DOCKER)' save '$(1)' | zstd -T0 -19 > '$(2)'
+	'$(DOCKER)' save '$(1)' | zstd -T0 -19 --long=29 > '$(2)'
 endef
 
 .PHONY: save-image
@@ -62,7 +62,7 @@ $(IMAGE_TARBALL): build-image
 ##################################################
 
 define load_image
-	zstd -dc '$(1)' | '$(DOCKER)' load
+	zstd -dc --long=29 '$(1)' | '$(DOCKER)' load
 endef
 
 define tag_image
