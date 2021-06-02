@@ -7,7 +7,6 @@ FROM docker.io/hectormolinero/xubuntu:latest AS wine
 # Environment
 ENV WINEARCH=win64
 ENV WINEDEBUG=warn+all
-ENV UNPRIVILEGED_USER_NAME=wine
 
 # Add Wine repository
 RUN printf '%s\n' "deb https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/wine.list \
