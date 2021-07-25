@@ -19,7 +19,6 @@ RUN printf '%s\n' "deb http://ppa.launchpad.net/lutris-team/lutris/ubuntu/ $(lsb
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
-	&& apt-get dist-upgrade -y \
 	&& apt-get install -y --no-install-recommends \
 		cabextract \
 		dosbox \
