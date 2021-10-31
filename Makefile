@@ -24,6 +24,9 @@ IMAGE_BUILD_OPTS :=
 
 IMAGE_TARBALL := $(DISTDIR)/$(IMAGE_PROJECT).tzst
 
+export DOCKER_BUILDKIT := 1
+export BUILDKIT_PROGRESS := plain
+
 ##################################################
 ## "all" target
 ##################################################
