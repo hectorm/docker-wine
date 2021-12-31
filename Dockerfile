@@ -21,12 +21,18 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		cabextract \
+		dos2unix \
 		dosbox \
 		exe-thumbnailer \
+		libvkd3d-utils1 \
 		libvkd3d1 \
 		lutris \
-		make \
+		p7zip-full \
+		p7zip-rar \
+		vkd3d-compiler \
+		vkd3d-demos \
 		wimtools \
 		winbind \
 		winehq-stable \
+		xchm \
 	&& rm -rf /var/lib/apt/lists/*
