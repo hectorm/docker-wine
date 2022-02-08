@@ -1,24 +1,19 @@
 #!/usr/bin/make -f
 
 SHELL := /bin/sh
-.SHELLFLAGS := -eu -c
+.SHELLFLAGS := -euc
 
 DOCKER := $(shell command -v docker 2>/dev/null)
 GIT := $(shell command -v git 2>/dev/null)
 
 DISTDIR := ./dist
-VERSION_FILE = ./VERSION
 DOCKERFILE := ./Dockerfile
 
 IMAGE_REGISTRY := docker.io
 IMAGE_NAMESPACE := hectormolinero
 IMAGE_PROJECT := wine
 IMAGE_NAME := $(IMAGE_REGISTRY)/$(IMAGE_NAMESPACE)/$(IMAGE_PROJECT)
-
-IMAGE_VERSION := v0
-ifneq ($(wildcard $(VERSION_FILE)),)
-	IMAGE_VERSION := $(shell cat '$(VERSION_FILE)')
-endif
+IMAGE_VERSION := $(shell '$(GIT)' describe --abbrev=0 2>/dev/null || printf 'v0')
 
 IMAGE_BUILD_OPTS :=
 
@@ -98,8 +93,7 @@ push-image:
 version:
 	@if printf '%s' '$(IMAGE_VERSION)' | grep -q '^v[0-9]\{1,\}$$'; then \
 		NEW_IMAGE_VERSION=$$(awk -v 'v=$(IMAGE_VERSION)' 'BEGIN {printf "v%.0f", substr(v,2)+1}'); \
-		printf '%s\n' "$${NEW_IMAGE_VERSION:?}" > '$(VERSION_FILE)'; \
-		'$(GIT)' add '$(VERSION_FILE)'; '$(GIT)' commit -m "$${NEW_IMAGE_VERSION:?}"; \
+		'$(GIT)' commit --allow-empty -m "$${NEW_IMAGE_VERSION:?}"; \
 		'$(GIT)' tag -a "$${NEW_IMAGE_VERSION:?}" -m "$${NEW_IMAGE_VERSION:?}"; \
 	else \
 		>&2 printf 'Malformed version string: %s\n' '$(IMAGE_VERSION)'; \
