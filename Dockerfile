@@ -2,7 +2,7 @@
 ## "wine" stage
 ##################################################
 
-FROM docker.io/hectormolinero/xubuntu:latest AS wine
+FROM docker.io/hectorm/xubuntu:latest AS main
 
 # Environment
 ENV WINEARCH=win64

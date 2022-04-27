@@ -14,7 +14,7 @@ docker run \
   --publish 3322:3322/tcp \
   --publish 3389:3389/tcp \
   --device /dev/dri:/dev/dri \
-  docker.io/hectormolinero/wine:latest
+  docker.io/hectorm/wine:latest
 ```
 
 ### Docker Compose
@@ -23,7 +23,7 @@ docker run \
 version: '3.9'
 services:
   wine:
-    image: 'docker.io/hectormolinero/wine:latest'
+    image: 'docker.io/hectorm/wine:latest'
     shm_size: '2gb'
     ports:
       - '3322:3322/tcp'
