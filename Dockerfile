@@ -1,8 +1,8 @@
 ##################################################
-## "wine" stage
+## "main" stage
 ##################################################
 
-FROM docker.io/hectorm/xubuntu:v96 AS main
+FROM docker.io/hectorm/xubuntu:v99 AS main
 
 # Environment
 ENV WINEARCH=win64
@@ -16,7 +16,7 @@ RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/looku
 RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x82D96E430A1F1C0F0502747E37B90EDD4E3EFAE4' | gpg --dearmor -o /etc/apt/trusted.gpg.d/lutris.gpg \
 	&& printf '%s\n' "deb [signed-by=/etc/apt/trusted.gpg.d/lutris.gpg] https://ppa.launchpadcontent.net/lutris-team/lutris/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/lutris.list
 
-# Install system packages
+# Install packages
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
