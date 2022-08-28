@@ -33,6 +33,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		vkd3d-demos \
 		wimtools \
 		winbind \
-		winehq-stable \
+		winehq-devel \
 		xchm \
 	&& rm -rf /var/lib/apt/lists/*
