@@ -14,7 +14,7 @@ RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/looku
 
 # Add Lutris repository
 RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x82D96E430A1F1C0F0502747E37B90EDD4E3EFAE4' | gpg --dearmor -o /etc/apt/trusted.gpg.d/lutris.gpg \
-	&& printf '%s\n' "deb [signed-by=/etc/apt/trusted.gpg.d/lutris.gpg] http://ppa.launchpad.net/lutris-team/lutris/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/lutris.list
+	&& printf '%s\n' "deb [signed-by=/etc/apt/trusted.gpg.d/lutris.gpg] https://ppa.launchpadcontent.net/lutris-team/lutris/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/lutris.list
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
