@@ -2,7 +2,7 @@
 ## "main" stage
 ##################################################
 
-FROM docker.io/hectorm/xubuntu:v103 AS main
+FROM docker.io/hectorm/xubuntu:v104 AS main
 
 # Environment
 ENV WINEARCH=win64
@@ -14,6 +14,7 @@ RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/looku
 
 # Install packages
 RUN export DEBIAN_FRONTEND=noninteractive \
+	&& dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		cabextract \
