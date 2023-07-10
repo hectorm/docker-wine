@@ -2,7 +2,7 @@
 ## "main" stage
 ##################################################
 
-FROM docker.io/hectorm/xubuntu:v111 AS main
+FROM docker.io/hectorm/xubuntu:v112 AS main
 
 # Environment
 ENV WINEARCH=win64
