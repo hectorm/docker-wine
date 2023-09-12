@@ -19,7 +19,7 @@ jobs:
       contents: 'read'
     steps:
       - name: 'Checkout project'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@v4'
       - name: 'Build and save image'
         run: |
           make IMAGE_BUILD_OPTS="--pull" build-image save-image
@@ -40,7 +40,7 @@ jobs:
       contents: 'read'
     steps:
       - name: 'Checkout project'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@v4'
       - name: 'Download artifacts'
         uses: 'actions/download-artifact@v3'
         with:
