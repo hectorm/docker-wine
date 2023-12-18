@@ -25,7 +25,7 @@ jobs:
           make IMAGE_BUILD_OPTS="--pull" build-image save-image
       - name: 'Upload artifacts'
         if: "startsWith(github.ref, 'refs/tags/v')"
-        uses: 'actions/upload-artifact@v3'
+        uses: 'actions/upload-artifact@v4'
         with:
           name: 'dist'
           path: './dist/'
