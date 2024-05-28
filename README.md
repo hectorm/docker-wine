@@ -20,7 +20,6 @@ docker run \
 ### Docker Compose
 
 ```yaml
-version: '3.9'
 services:
   wine:
     image: 'docker.io/hectorm/wine:latest'
