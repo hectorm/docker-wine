@@ -34,6 +34,7 @@ RUN <<-EOF
 		winbind \
 		winehq-devel \
 		winetricks \
-		xchm
+		xchm \
+		zenity
 	rm -rf /var/lib/apt/lists/*
 EOF
