@@ -30,5 +30,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		wimtools \
 		winbind \
 		winehq-devel \
+		winetricks \
 		xchm \
 	&& rm -rf /var/lib/apt/lists/*
