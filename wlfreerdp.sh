@@ -9,7 +9,7 @@ RDP_DOMAIN=Xorg
 RDP_USER=user
 RDP_PASSWORD=password
 
-exec xfreerdp3 \
+exec wlfreerdp3 \
 	/v:"${RDP_HOST:?}":"${RDP_PORT:?}" \
 	/u:"${RDP_DOMAIN:?}"\\"${RDP_USER:?}" /p:"${RDP_PASSWORD:?}" \
 	/log-level:INFO /cert:ignore \
