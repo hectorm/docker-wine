@@ -28,6 +28,8 @@ RUN <<-EOF
 		libvkd3d1 \
 		p7zip-full \
 		p7zip-rar \
+		rar \
+		unrar \
 		vkd3d-compiler \
 		vkd3d-demos \
 		wimtools \
