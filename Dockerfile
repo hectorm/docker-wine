@@ -26,6 +26,7 @@ RUN <<-EOF
 		exe-thumbnailer \
 		libvkd3d-utils1 \
 		libvkd3d1 \
+		msitools \
 		p7zip-full \
 		p7zip-rar \
 		rar \
