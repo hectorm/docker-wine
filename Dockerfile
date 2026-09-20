@@ -2,7 +2,7 @@
 ## "main" stage
 ##################################################
 
-FROM docker.io/hectorm/xubuntu:v128 AS main
+FROM docker.io/hectorm/xubuntu:v129 AS main
 
 # Environment
 ENV WINEARCH=win64
@@ -17,9 +17,10 @@ EOF
 # Install packages
 RUN <<-EOF
 	export DEBIAN_FRONTEND=noninteractive
-	dpkg --add-architecture i386
 	apt-get update
 	apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 \
+		7zip \
+		7zip-rar \
 		cabextract \
 		dos2unix \
 		dosbox \
@@ -27,8 +28,6 @@ RUN <<-EOF
 		libvkd3d-utils1 \
 		libvkd3d1 \
 		msitools \
-		p7zip-full \
-		p7zip-rar \
 		rar \
 		unrar \
 		vkd3d-compiler \
