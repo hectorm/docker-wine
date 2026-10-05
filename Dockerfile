@@ -1,8 +1,10 @@
+# syntax=docker.io/docker/dockerfile:1
+
 ##################################################
 ## "main" stage
 ##################################################
 
-FROM docker.io/hectorm/xubuntu:v133 AS main
+FROM docker.io/hectorm/xubuntu:v134 AS main
 
 # Environment
 ENV WINEARCH=win64
