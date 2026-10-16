@@ -11,9 +11,14 @@ ENV WINEARCH=win64
 ENV WINEDEBUG=warn+all
 
 # Add Wine repository
+COPY --chown=root:root --chmod=a+rX,u+w,go-w ./config/apt/keyrings/ /etc/apt/keyrings/
 RUN <<-EOF
-	curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xD43F640145369C51D786DDEA76F1A20FF987672F' | gpg --dearmor -o /etc/apt/trusted.gpg.d/wine.gpg
-	printf '%s\n' "deb [signed-by=/etc/apt/trusted.gpg.d/wine.gpg] https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/wine.list
+	printf '%s\n' > /etc/apt/sources.list.d/winehq.sources \
+		'Types: deb' \
+		'URIs: https://dl.winehq.org/wine-builds/ubuntu/' \
+		"Suites: $(lsb_release -cs)" \
+		'Components: main' \
+		'Signed-By: /etc/apt/keyrings/winehq.asc'
 EOF
 
 # Install packages
