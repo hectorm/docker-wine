@@ -13,6 +13,7 @@ docker run \
   --shm-size 2g \
   --publish 3322:3322/tcp \
   --publish 3389:3389/tcp \
+  --mount type=volume,src=wine-home,dst=/home/ \
   --device /dev/dri:/dev/dri \
   docker.io/hectorm/wine:latest
 ```
@@ -27,14 +28,20 @@ services:
     ports:
       - '3322:3322/tcp'
       - '3389:3389/tcp'
+    volumes:
+      - 'wine-home:/home/'
     devices:
       - '/dev/dri:/dev/dri'
+
+volumes:
+  wine-home:
 ```
 
-> You will be able to connect to the container via SSH through 3322/tcp port and RDP through 3389/tcp port.
+> You will be able to connect to the container via SSH through 3322/TCP port, RDP through 3389/TCP port and, if enabled,
+> noVNC through 6080/TCP port (HTTPS).
 
 > **Important:** some software (like Firefox) need the shared memory to be increased, if you
-encounter any problem related to this you may use the `--shm-size` option.
+> encounter any problem related to this you may use the `--shm-size` option.
 
 ## Environment variables
 
@@ -44,8 +51,10 @@ encounter any problem related to this you may use the `--shm-size` option.
 * `UNPRIVILEGED_USER_PASSWORD`: unprivileged user password (`password` by default).
 * `UNPRIVILEGED_USER_GROUPS`: comma-separated list of additional GIDs for the unprivileged user (none by default).
 * `UNPRIVILEGED_USER_SHELL`: unprivileged user shell (`/bin/bash` by default).
+* `UNPRIVILEGED_USER_HOME`: unprivileged user home directory (`/home/${UNPRIVILEGED_USER_NAME}` by default).
 * `SERVICE_XRDP_BOOTSTRAP_ENABLED`: enable xrdp bootstrap service, initialises user session on startup (`false` by default).
 * `SERVICE_XORG_HEADLESS_ENABLED`: enable headless X server service (`false` by default).
+* `SERVICE_NOVNC_ENABLED`: enable noVNC service (`false` by default).
 * `WINEDEBUG`: Wine [debug channels](https://gitlab.winehq.org/wine/wine/-/wikis/Debug-Channels) (`fixme-all` by default).
 
 ## License
