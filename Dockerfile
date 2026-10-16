@@ -27,20 +27,41 @@ RUN <<-EOF
 	apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 \
 		7zip \
 		7zip-rar \
+		aria2 \
 		cabextract \
 		dos2unix \
 		dosbox \
 		exe-thumbnailer \
+		gdb \
+		gstreamer1.0-plugins-bad \
+		gstreamer1.0-plugins-ugly \
+		innoextract \
+		libodbc2 \
 		msitools \
 		rar \
 		unrar \
+		unshield \
 		wimtools \
 		winbind \
 		winehq-devel \
-		winetricks \
 		xchm \
 		zenity
 	rm -rf /var/lib/apt/lists/*
+EOF
+
+# Install Winetricks
+RUN <<-EOF
+	WINETRICKS_URL='https://github.com/Winetricks/winetricks/archive/refs/heads/master.tar.gz'
+	WINETRICKS_DIR=$(mktemp -d)
+	curl --proto '=https' --tlsv1.3 -sSfL "${WINETRICKS_URL:?}" | tar -xzC "${WINETRICKS_DIR:?}" --strip-components=1
+	cd "${WINETRICKS_DIR:?}"/src/
+	install -Dm 755 ./winetricks /usr/local/bin/winetricks
+	install -Dm 644 ./winetricks.1 /usr/local/share/man/man1/winetricks.1
+	install -Dm 644 ./winetricks.desktop /usr/local/share/applications/winetricks.desktop
+	install -Dm 644 ./io.github.winetricks.Winetricks.metainfo.xml /usr/local/share/metainfo/io.github.winetricks.Winetricks.metainfo.xml
+	install -Dm 644 ./winetricks.svg /usr/local/share/icons/hicolor/scalable/apps/winetricks.svg
+	install -Dm 644 ./winetricks.bash-completion /usr/local/share/bash-completion/completions/winetricks
+	cd / && rm -rf "${WINETRICKS_DIR:?}"
 EOF
 
 # Install Mono and Gecko
