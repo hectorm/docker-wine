@@ -7,8 +7,7 @@
 FROM docker.io/hectorm/xubuntu:v136 AS main
 
 # Environment
-ENV WINEARCH=win64
-ENV WINEDEBUG=warn+all
+ENV WINEDEBUG=fixme-all
 
 # Add Wine repository
 COPY --chown=root:root --chmod=a+rX,u+w,go-w ./config/apt/keyrings/ /etc/apt/keyrings/
@@ -32,13 +31,9 @@ RUN <<-EOF
 		dos2unix \
 		dosbox \
 		exe-thumbnailer \
-		libvkd3d-utils1 \
-		libvkd3d1 \
 		msitools \
 		rar \
 		unrar \
-		vkd3d-compiler \
-		vkd3d-demos \
 		wimtools \
 		winbind \
 		winehq-devel \
@@ -50,7 +45,8 @@ EOF
 
 # Install Mono and Gecko
 RUN <<-EOF
-	ADDONS_C_URL='https://gitlab.winehq.org/wine/wine/-/raw/master/dlls/appwiz.cpl/addons.c'
+	WINE_VERSION=$(wine --version)
+	ADDONS_C_URL="https://gitlab.winehq.org/wine/wine/-/raw/${WINE_VERSION:?}/dlls/appwiz.cpl/addons.c"
 	ADDONS_C_CONTENT=$(curl --proto '=https' --tlsv1.3 -sSf "${ADDONS_C_URL:?}")
 	MONO_DIR='/opt/wine-devel/share/wine/mono/'
 	MONO_VERSION=$(printf '%s\n' "${ADDONS_C_CONTENT:?}" | awk -F '"' '/^#define MONO_VERSION "[0-9]+(\.[0-9]+)+"$/{print($2)}')

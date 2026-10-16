@@ -46,6 +46,7 @@ encounter any problem related to this you may use the `--shm-size` option.
 * `UNPRIVILEGED_USER_SHELL`: unprivileged user shell (`/bin/bash` by default).
 * `SERVICE_XRDP_BOOTSTRAP_ENABLED`: enable xrdp bootstrap service, initialises user session on startup (`false` by default).
 * `SERVICE_XORG_HEADLESS_ENABLED`: enable headless X server service (`false` by default).
+* `WINEDEBUG`: Wine [debug channels](https://gitlab.winehq.org/wine/wine/-/wikis/Debug-Channels) (`fixme-all` by default).
 
 ## License
 
